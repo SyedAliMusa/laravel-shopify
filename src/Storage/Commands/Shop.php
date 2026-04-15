@@ -79,7 +79,6 @@ class Shop implements ShopCommand
         $offlineAccessTokenExpiresAt = null,
         $offlineRefreshTokenExpiresAt = null
     ): bool {
-    {
         $shop = $this->getShop($shopId);
         $shop->password = $token->toNative();
         $shop->password_updated_at = Carbon::now();
