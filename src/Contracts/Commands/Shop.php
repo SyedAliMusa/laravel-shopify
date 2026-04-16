@@ -47,7 +47,7 @@ interface Shop
      *
      * @return bool
      */
-     public function setAccessToken(
+    public function setAccessToken(
         ShopIdValue $shopId,
         AccessTokenValue $token,
         ?string $offlineRefreshTokenPlain = null,

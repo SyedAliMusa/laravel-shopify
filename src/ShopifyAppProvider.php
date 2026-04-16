@@ -133,7 +133,6 @@ class ShopifyAppProvider extends ServiceProvider
             );
         });
 
-
         // Actions
         $this->app->bind(InstallShopAction::class, function ($app) {
             return new InstallShopAction(

@@ -81,6 +81,13 @@ interface ShopModel extends Authenticatable
     public function hasExpiringOfflineAccess(): bool;
 
     /**
+     * Whether the shop has expiring offline token metadata (encrypted refresh token stored).
+     *
+     * @return bool
+     */
+    public function hasExpiringOfflineAccess(): bool;
+
+    /**
      * Get the API helper instance for a shop.
      * TODO: Find a better way than using resolve(). However, we can't inject in model constructors.
      *

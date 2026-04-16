@@ -72,7 +72,6 @@ trait ShopModel
         ]);
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -156,7 +155,6 @@ trait ShopModel
     {
         return ! empty($this->shopify_offline_refresh_token);
     }
-
 
     /**
      * {@inheritDoc}

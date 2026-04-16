@@ -160,7 +160,6 @@ class ApiHelper implements IApiHelper
             'subject_token_type' => 'urn:ietf:params:oauth:token-type:id_token',
             'requested_token_type' => 'urn:shopify:params:oauth:token-type:offline-access-token',
         ];
-
         if (Util::getShopifyConfig('expiring_offline_tokens', $shop)) {
             $data['expiring'] = 1;
         }
@@ -232,7 +231,6 @@ class ApiHelper implements IApiHelper
 
         return $response['body'];
     }
-
 
     /**
      * {@inheritdoc}

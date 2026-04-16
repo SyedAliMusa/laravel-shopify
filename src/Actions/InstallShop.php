@@ -52,8 +52,6 @@ class InstallShop
             }
 
             // Get the data and set the access token
-            $data = $idToken !== null ? $apiHelper->performOfflineTokenExchange($idToken) : $apiHelper->getAccessData($code);
-            $this->shopCommand->setAccessToken($shop->getId(), AccessToken::fromNative($data['access_token']));
             $data = $idToken !== null
                 ? $apiHelper->performOfflineTokenExchange($idToken)
                 : $apiHelper->getAccessData($code, $grantMode);
