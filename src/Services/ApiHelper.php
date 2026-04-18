@@ -18,7 +18,6 @@ use Osiset\ShopifyApp\Objects\Enums\ApiMethod;
 use Osiset\ShopifyApp\Objects\Enums\AuthMode;
 use Osiset\ShopifyApp\Objects\Enums\ChargeType;
 use Osiset\ShopifyApp\Objects\Enums\DataSource;
-use Osiset\ShopifyApp\Objects\Enums\PlanInterval;
 use Osiset\ShopifyApp\Objects\Transfers\PlanDetails as PlanDetailsTransfer;
 use Osiset\ShopifyApp\Objects\Transfers\UsageChargeDetails as UsageChargeDetailsTransfer;
 use Osiset\ShopifyApp\Objects\Values\ChargeReference;
@@ -377,12 +376,6 @@ class ApiHelper implements IApiHelper
             }
         }
         ';
-        $intervalMap = [
-            PlanInterval::EVERY_30_DAYS => 'EVERY_30_DAYS',
-            PlanInterval::ANNUAL        => 'ANNUAL',
-        ];
-        $interval = $intervalMap[$payload->interval] ?? 'EVERY_30_DAYS';
-
         $variables = [
             'name' => $payload->name,
             'returnUrl' => $payload->returnUrl,
@@ -396,7 +389,7 @@ class ApiHelper implements IApiHelper
                                 'amount' => $payload->price,
                                 'currencyCode' => 'USD',
                             ],
-                            'interval' => $interval,
+                            'interval' => $payload->interval,
                         ],
                     ],
                 ],
@@ -404,14 +397,8 @@ class ApiHelper implements IApiHelper
         ];
 
         $response = $this->doRequestGraphQL($query, $variables);
-        $result = $response['body']['data']['appSubscriptionCreate'];
 
-        if (!empty($result['userErrors'])) {
-            $message = collect($result['userErrors'])->pluck('message')->implode(', ');
-            throw new ApiException($message);
-        }
-
-        return $result;
+        return $response['body']['data']['appSubscriptionCreate'];
     }
 
     /**
